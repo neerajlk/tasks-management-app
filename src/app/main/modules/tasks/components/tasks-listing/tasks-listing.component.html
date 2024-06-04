@@ -1,0 +1,49 @@
+<div class="row">
+  <div class="offset-1 col-10">
+    <div class="row my-2">
+      <div class="col-12">
+        <h3>{{title}}</h3>
+      </div>
+      <div class="col-12">
+        <div class="row my-2">
+          <div class="col-6">
+            <label>User : </label>
+            <select class="custom-select mx-2" [(ngModel)]="selectedUser" (change)="getTasks(selectedUser,selectedTask)">
+              <option value="-1">Select User</option>
+              <option *ngFor="let user of users">{{user}}</option>
+            </select>
+          </div>
+          <div class="col-6">
+            <label>State : </label>
+            <select class="custom-select mx-2" [(ngModel)]="selectedTask" (change)="getTasks(selectedUser,selectedTask)">
+              <option value="-1">Select State</option>
+              <option value='1'>Complete</option>
+              <option value='2'>InComplete</option>              
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row my-4">
+      <ng-container *ngIf="tasksData && tasksData.length != 0">
+        <div class="col-md-3 col-lg-3 col-sm-12 my-2" *ngFor="let task of tasksData">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title">User : {{task.userId}}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Status : {{task.completed ? 'Completed' : 'InComplete'}} </h6>
+              <p class="card-text">{{task.title}}</p>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+     
+      <div class="col my-3" *ngIf="tasksData.length == 0">
+        <div>
+          <p class="text-center">No Data Found.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
